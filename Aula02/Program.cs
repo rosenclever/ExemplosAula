@@ -9,6 +9,7 @@ do
     Console.WriteLine("(0) Sair");
     Console.WriteLine("(1) Somar dois números");
     Console.WriteLine("(2) Converter Metros em Milímetros");
+    Console.WriteLine("(3) Adivinhar um número");
     Console.Write("Opção: ");
     opcao = Convert.ToInt32(Console.ReadLine());
     switch (opcao)
@@ -18,6 +19,9 @@ do
             break;
         case 2:
             Convertedor();
+            break;
+        case 3:
+            AdivinharNumero();
             break;
 
     }
@@ -64,4 +68,36 @@ void Convertedor()
     } while (entradaInvalida);
 }
 
-
+void AdivinharNumero()
+{
+    Random random = new Random();
+    int numeroMisterioso = random.Next(1, 100);
+    int tentativas = 10;
+    bool acertou = false;
+    Console.WriteLine("Adivinhe o número gerado!!");
+    for (int i = 1; i <= tentativas; i++)
+    {
+        Console.Write($"{i}a. tentativa: ");
+        var entrada = Console.ReadLine();
+        int entradaValida;
+        while (!int.TryParse(entrada, out  entradaValida))
+        {
+            Console.WriteLine("Você deve informar um número inteiro!");
+            Console.Write($"{i}a. tentativa: ");
+            entrada = Console.ReadLine();
+        }
+        if (entradaValida == numeroMisterioso)
+        {
+            Console.WriteLine("Parabéns, você acertou!");
+            acertou = true;
+            break;
+        }
+        else if (entradaValida > numeroMisterioso)
+            Console.WriteLine("O valor informado é maior que o número misterioso...");
+        else
+            Console.WriteLine("O valor informado é menor que o número misterioso...");
+        
+    }
+    if(!acertou)
+        Console.WriteLine($"Número de tentativas excedidas!\nO número misterioso é {numeroMisterioso}");
+}
