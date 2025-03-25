@@ -32,7 +32,7 @@
             throw new ArgumentOutOfRangeException("amount");
         }
 
-        m_balance += amount; // intentionally incorrect code
+        m_balance -= amount; // intentionally incorrect code
     }
     public void Credit(double amount)
     {
