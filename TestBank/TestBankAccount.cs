@@ -53,6 +53,7 @@ namespace TestBank
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => conta.Credit(valor_depositado));
         }
         //teste para saques com valor maior que o saldo
+        [TestMethod]
         public void Saque_comValorMaiorQueSaldo_LancaArgumentOutOfRangeException()
         {
             //cenário
@@ -65,5 +66,22 @@ namespace TestBank
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => conta.Debit(valor_do_saque));
         }
         //Teste para transferência de valores entre contas (TDD)
+        [TestMethod]
+        public void Transferencia_ComValorValido_AtualizaSaldoDasContas()
+        {
+            //cenario
+            BankAccount conta1 = new BankAccount("Paulo", 1000);
+            BankAccount conta2 = new BankAccount("Ana", 500);
+            double valor_transferencia = 500;
+            double saldo_final_conta1 = 500;
+            double saldo_final_conta2 = 1000;
+
+            //ação
+            conta1.Transferir(conta2, valor_transferencia);
+
+            //verificacao
+            Assert.AreEqual(saldo_final_conta1, conta1.Balance);
+            Assert.AreEqual(saldo_final_conta2 , conta2.Balance);  
+        }
     }
 }

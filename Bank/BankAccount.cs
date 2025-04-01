@@ -20,7 +20,7 @@
         get { return m_balance; }
     }
 
-    public void Debit(double amount)
+    public bool Debit(double amount)
     {
         if (amount > m_balance)
         {
@@ -33,6 +33,7 @@
         }
 
         m_balance -= amount; // intentionally incorrect code
+        return true;
     }
     public void Credit(double amount)
     {
@@ -42,6 +43,12 @@
         }
 
         m_balance += amount;
+    }
+
+    public void Transferir(BankAccount contaDestino, double valorTransferido)
+    {
+        if(Debit(valorTransferido)) 
+            contaDestino.Credit(valorTransferido);
     }
 
     public static void Main()
