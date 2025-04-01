@@ -53,7 +53,17 @@ namespace TestBank
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => conta.Credit(valor_depositado));
         }
         //teste para saques com valor maior que o saldo
+        public void Saque_comValorMaiorQueSaldo_LancaArgumentOutOfRangeException()
+        {
+            //cenário
+            double saldo_inicial = 1000;
+            double valor_do_saque = 1500;
+            BankAccount conta = new BankAccount("Ana", saldo_inicial);
 
+            //ação e
+            //verificação
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => conta.Debit(valor_do_saque));
+        }
         //Teste para transferência de valores entre contas (TDD)
     }
 }
